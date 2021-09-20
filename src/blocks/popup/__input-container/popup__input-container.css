@@ -1,0 +1,12 @@
+.popup__input-container {
+  margin: 75px auto 45px;
+  border-style: none;
+  font-family: inherit;
+  padding: 0;
+}
+
+@media (min-width: 581px) {
+  .popup__input-container {
+    margin: 54px auto 58px;
+  }
+}

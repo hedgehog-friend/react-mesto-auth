@@ -1,0 +1,11 @@
+.popup__exit_location_image{
+  top: -44px;
+}
+@media (min-width: 581px) {
+  .popup__exit {
+    width: 40px;
+    height: 40px;
+    right: -40px;
+
+  }
+}

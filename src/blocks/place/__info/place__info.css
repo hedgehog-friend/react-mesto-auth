@@ -1,0 +1,7 @@
+.place__info {
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 224px 22px;
+  align-items: center;
+  min-height: 79px;
+}

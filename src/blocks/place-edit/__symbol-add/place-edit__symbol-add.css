@@ -1,0 +1,10 @@
+.place-edit__symbol-add {
+  width: 16px;
+  background-position: center center;
+}
+
+@media (min-width: 600px) {
+  .place-edit__symbol-add {
+    width: 22px;
+  }
+}

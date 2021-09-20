@@ -1,0 +1,19 @@
+.header__logo {
+  width: 103.74px;
+  display: block;
+  object-fit: cover;
+  margin-left: 27px;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.header__logo:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+@media (min-width: 425px) {
+  .header__logo {
+    width: 142px;
+    margin: 0;
+  }
+}

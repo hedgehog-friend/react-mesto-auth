@@ -1,0 +1,19 @@
+.profile__data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+@media (min-width: 581px) {
+  .profile__data {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 20px;
+    max-width: calc(
+      100% - 170px
+    ); /* 170px — 150 под кнопку добавления места и 20 отступ от нее*/
+  }
+}

@@ -1,0 +1,23 @@
+.profile__name {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 27px;
+  line-height: 33px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin: 0;
+  flex: 1;
+  max-width: calc(
+    880px - 90px - 150px - 120px
+  ); /*90px — сумма отступов
+  между элементами, 120 — место под изображение, 150 — место под кнопку
+  добавления места*/
+}
+
+@media (min-width: 800px) {
+  .profile__name {
+    font-size: 42px;
+    line-height: 48px;
+  }
+}

@@ -1,0 +1,5 @@
+.profile__info-upper {
+  display: flex;
+  align-items: baseline;
+  margin: 26px auto 10px;
+}
