@@ -1,0 +1,17 @@
+.login-form__link-register {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+  text-align: center;
+  color: #ffffff;
+  margin: 15px auto 0;
+  display: block;
+}
+
+.login-form__link-register:hover {
+  transition: 0.3s;
+  opacity: 0.8;
+}

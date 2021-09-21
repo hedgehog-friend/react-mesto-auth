@@ -4,7 +4,6 @@ export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
-      //   Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ password, email }),
@@ -19,26 +18,15 @@ export const register = (password, email) => {
 };
 
 export const authorize = (password, email) => {
-  return (
-    fetch(`${BASE_URL}/signin`, {
-      method: "POST",
-      headers: {
-        //   Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ password, email }),
-    })
-      .then((response) => response.json())
-      // .then((data) => {
-      //   if (data.token) {
-      //     localStorage.setItem("jwt", data.token);
-      //     return data;
-      //   } else {
-      //     return;
-      //   }
-      // })
-      .catch((err) => console.log(err))
-  );
+  return fetch(`${BASE_URL}/signin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ password, email }),
+  })
+    .then((response) => response.json())
+    .catch((err) => console.log(err));
 };
 
 export const getContent = (token) => {
@@ -49,7 +37,5 @@ export const getContent = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  })
-    .then((res) => res.json())
-    .then((data) => data);
+  }).then((res) => res.json());
 };

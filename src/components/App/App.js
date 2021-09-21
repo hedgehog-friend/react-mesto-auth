@@ -6,7 +6,6 @@ import {
   Redirect,
   useHistory,
 } from "react-router-dom";
-import Header from "../Header/Header.js";
 import Main from "../Main/Main.js";
 import Footer from "../Footer/Footer.js";
 import ImagePopup from "../ImagePopup/ImagePopup.js";
@@ -36,14 +35,12 @@ function App() {
 
   const history = useHistory();
   const [loggedIn, setLoggedIn] = useState(false);
-  const [email, setEmail] = useState({});
+  const [email, setEmail] = useState("");
   const auth = async (jwt) => {
     return apiAuth.getContent(jwt).then((res) => {
       if (res) {
         setLoggedIn(true);
-        setEmail({
-          email: res.email,
-        });
+        setEmail(res.data.email);
       }
     });
   };
@@ -70,7 +67,8 @@ function App() {
 
   const onLogin = ({ password, email }) => {
     return apiAuth.authorize(password, email).then((res) => {
-      if (!res) throw new Error("Неправильные имя пользователя или пароль");
+      if (!res || !res.token)
+        throw new Error("Неправильные имя пользователя или пароль");
       if (res.token) {
         setLoggedIn(true);
         localStorage.setItem("jwt", res.token);
@@ -214,7 +212,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="App body">
-        <Header />
+        {/* <Header /> */}
 
         <Router>
           <Switch>
@@ -222,6 +220,7 @@ function App() {
               exact
               path="/user"
               loggedIn={loggedIn}
+              email={email}
               onSignOut={onSignOut}
               component={Main}
               onEditProfile={handleEditProfileClick}
@@ -234,14 +233,10 @@ function App() {
               onCardDelete={handleCardDelete}
             />
             <Route exact path="/sign-in">
-              <div className="loginContainer">
-                <Login onLogin={onLogin} />
-              </div>
+              <Login onLogin={onLogin} />
             </Route>
             <Route exact path="/sign-up">
-              <div className="registerContainer">
-                <Register onRegister={onRegister} />
-              </div>
+              <Register onRegister={onRegister} />
             </Route>
             <Route>
               {loggedIn ? <Redirect to="/user" /> : <Redirect to="/sign-in" />}

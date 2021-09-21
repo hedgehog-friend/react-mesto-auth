@@ -1,0 +1,16 @@
+.header__enter-link {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: right;
+  color: #ffffff;
+  transition: opacity 0.5s ease-in-out;
+  text-decoration: none;
+}
+
+.header__enter-link:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

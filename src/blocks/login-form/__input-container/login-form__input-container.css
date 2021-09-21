@@ -1,0 +1,7 @@
+.login-form__input-container {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  margin: 0;
+  color: #ffffff;
+}

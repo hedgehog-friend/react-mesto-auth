@@ -2,9 +2,6 @@ import { useState } from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 
 function AddPlacePopup(props) {
-  // const namePlaceRef = useRef();
-  // const linkPlaceRef = useRef();
-
   const [name, setName] = useState();
   const [link, setLink] = useState();
 

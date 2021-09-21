@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import Header from "../Header/Header";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import forbidden from "../../images/symbols_logo/forbidden.png";
 
 const Login = ({ onLogin, ...props }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+  const [isOpen, setIsOpen] = useState(false);
 
   const resetForm = () => {
     setEmail("");
@@ -16,10 +20,17 @@ const Login = ({ onLogin, ...props }) => {
 
     onLogin({ email, password })
       .then(resetForm)
-      .then(() => history.push("/user"))
+      .then(() => {
+        history.push("/user");
+      })
       .catch((err) => {
         console.log(err);
+        setIsOpen(true);
       });
+  };
+
+  const onPopupClosed = () => {
+    setIsOpen(false);
   };
 
   useEffect(() => {
@@ -29,46 +40,59 @@ const Login = ({ onLogin, ...props }) => {
   }, []);
 
   return (
-    <div className="login">
-      {/* <h1 className="login-title">Регистрация</h1> */}
-      <form className="login__form" name="login__form" onSubmit={handleSubmit}>
-        <h2 className="login-form__title">
-          {/* {props.title} */}
-          Вход
-        </h2>
-        <fieldset className="login-form__input-container">
-          <input
-            type="email"
-            id="login-email"
-            name="login-email"
-            className="login-form__item"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+    <>
+      <Header>
+        <Link to="sign-up" className="header__enter-link">
+          Регистрация
+        </Link>
+      </Header>
+      <div className="login">
+        <form className="login-form" name="login__form" onSubmit={handleSubmit}>
+          <h2 className="login-form__title">Вход</h2>
+          <fieldset className="login-form__input-container">
+            <input
+              type="email"
+              id="login-email"
+              name="login-email"
+              className="login-form__input"
+              placeholder="Email"
+              value={email}
+              minLength="4"
+              maxLength="40"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <input
+              type="password"
+              id="login-password"
+              name="login-password"
+              className="login-form__input"
+              placeholder="Пароль"
+              value={password}
+              minLength="2"
+              maxLength="40"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </fieldset>
+          <button type="submit" className="login-form__button-save">
+            Войти
+          </button>
+        </form>
+      </div>
+      <InfoTooltip onClose={onPopupClosed} isOpen={isOpen}>
+        <div className="popup__note-container">
+          <img
+            className="popup__forbidden-symbol"
+            src={forbidden}
+            alt="forbidden"
           />
-          {/* <span className="popup__input-error" id="name-profile-error"></span> */}
-          <input
-            type="password"
-            id="login-password"
-            name="login-password"
-            className="login-form__item"
-            placeholder="Пароль"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-          {/* <span
-              className="popup__input-error"
-              id="description-profile-error" */}
-          {/* ></span> */}
-        </fieldset>
-        <button type="submit" className="login__save">
-          {/* {props.buttonName} */}
-          Войти
-        </button>
-      </form>
-    </div>
+          <h2 className="popup__title popup__title_note">
+            Что-то пошло не так. Попробуйте еще раз.
+          </h2>
+        </div>
+      </InfoTooltip>
+    </>
   );
 };
 

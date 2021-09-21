@@ -1,0 +1,11 @@
+.login-form {
+  margin: 60px auto 0;
+  margin-top: 60px;
+  max-width: 358px;
+}
+
+@media screen and (min-width: 880px) {
+  .auth {
+    max-width: 80%;
+  }
+}

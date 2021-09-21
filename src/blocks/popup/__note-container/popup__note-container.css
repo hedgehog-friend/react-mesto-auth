@@ -1,0 +1,7 @@
+.popup__note-container {
+  display: flex;
+  flex-direction: column;
+  /* padding: 60px 36px; */
+  align-items: center;
+  max-width: 430px;
+}
