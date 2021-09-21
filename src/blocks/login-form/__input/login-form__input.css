@@ -10,15 +10,10 @@
   margin-bottom: 30px;
   padding: 0 0 10px;
   border: none;
-  opacity: 0.5;
   border-bottom: 2px solid #ccc;
   color: #ffffff;
 }
 
-login-form__input:focus {
-  color: #ffffff;
-}
-
-input::placeholder {
+.login-form__input::placeholder {
   color: #cccccc;
 }
