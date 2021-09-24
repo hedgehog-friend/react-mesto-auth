@@ -17,7 +17,7 @@ const Login = ({ onLogin, ...props }) => {
     setPassword("");
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     onLogin({ email, password })

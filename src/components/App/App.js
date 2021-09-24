@@ -36,13 +36,18 @@ function App() {
   const history = useHistory();
   const [loggedIn, setLoggedIn] = useState(false);
   const [email, setEmail] = useState("");
-  const auth = async (jwt) => {
-    return apiAuth.getContent(jwt).then((res) => {
-      if (res) {
-        setLoggedIn(true);
-        setEmail(res.data.email);
-      }
-    });
+  const auth = (jwt) => {
+    apiAuth
+      .getContent(jwt)
+      .then((res) => {
+        if (res) {
+          setLoggedIn(true);
+          setEmail(res.data.email);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -59,8 +64,7 @@ function App() {
 
   const onRegister = ({ password, email }) => {
     return apiAuth.register(password, email).then((res) => {
-      if (!res || res.statusCode === 400)
-        throw new Error("Что-то пошло не так");
+      if (!res) throw new Error("Что-то пошло не так");
       return res;
     });
   };
@@ -146,6 +150,10 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        // Этот метод вызывается в конечном итоге из EditAvatarPopup.
+        // Попап ожидает, что метод вернет промис, результат которого попап использует,
+        // чтобы проанализировать, успешно ли изменен аватар.
+        // Поле ввода ссылки на аватар очищается, только если редактирование было успешно.
         return Promise.reject(err);
       });
   }
@@ -159,6 +167,10 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        // Этот метод вызывается в конечном итоге из AddPlacePopup.
+        // Попап ожидает, что метод вернет промис, результат которого попап использует,
+        // чтобы проанализировать, успешно ли добавлено место.
+        // Поля очищаются, только если добавление прошло успешно.
         return Promise.reject(err);
       });
   }

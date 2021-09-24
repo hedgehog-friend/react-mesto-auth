@@ -12,7 +12,8 @@ function EditAvatarPopup(props) {
       })
       .then(() => {
         avatarLinkRef.current.value = "";
-      });
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
