@@ -3,11 +3,15 @@ import { Link, useHistory } from "react-router-dom";
 import Header from "../Header/Header.js";
 import InfoTooltip from "../InfoTooltip/InfoTooltip.js";
 import approved from "../../images/symbols_logo/approved.png";
+import forbidden from "../../images/symbols_logo/forbidden.png";
 
 const Register = ({ onRegister, ...props }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [successfulRegistration, setSuccessfulRegistration] = useState(false);
+  const [imageInfoTooltip, setImageInfoTooltip] = useState("");
+  const [textInfoTooltip, setTextInfoTooltip] = useState("");
   const history = useHistory();
 
   const resetForm = () => {
@@ -19,16 +23,27 @@ const Register = ({ onRegister, ...props }) => {
     e.preventDefault();
 
     onRegister({ password, email })
-      .then(resetForm)
-      .then(() => setIsOpen(true))
+      .then(() => {
+        resetForm();
+        setTextInfoTooltip("Вы успешно зарегистрировались!");
+        setImageInfoTooltip(approved);
+        setSuccessfulRegistration(true);
+        setIsOpen(true);
+      })
       .catch((err) => {
         console.log(err);
+        setSuccessfulRegistration(false);
+        setImageInfoTooltip(forbidden);
+        setTextInfoTooltip("Что-то пошло не так. Попробуйте еще раз.");
+        setIsOpen(true);
       });
   };
 
   const onPopupClosed = () => {
     setIsOpen(false);
-    history.push("/sign-in");
+    if (successfulRegistration) {
+      history.push("/sign-in");
+    }
   };
 
   useEffect(() => {
@@ -86,18 +101,12 @@ const Register = ({ onRegister, ...props }) => {
         </form>
       </div>
 
-      <InfoTooltip onClose={onPopupClosed} isOpen={isOpen}>
-        <div className="popup__note-container">
-          <img
-            className="popup__forbidden-symbol"
-            src={approved}
-            alt="approved"
-          />
-          <h2 className="popup__title popup__title_note">
-            Вы успешно зарегистрировались!
-          </h2>
-        </div>
-      </InfoTooltip>
+      <InfoTooltip
+        onClose={onPopupClosed}
+        isOpen={isOpen}
+        image={imageInfoTooltip}
+        text={textInfoTooltip}
+      />
     </>
   );
 };

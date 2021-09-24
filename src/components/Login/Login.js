@@ -9,6 +9,8 @@ const Login = ({ onLogin, ...props }) => {
   const [password, setPassword] = useState("");
   const history = useHistory();
   const [isOpen, setIsOpen] = useState(false);
+  const [imageInfoTooltip, setImageInfoTooltip] = useState("");
+  const [textInfoTooltip, setTextInfoTooltip] = useState("");
 
   const resetForm = () => {
     setEmail("");
@@ -25,6 +27,8 @@ const Login = ({ onLogin, ...props }) => {
       })
       .catch((err) => {
         console.log(err);
+        setImageInfoTooltip(forbidden);
+        setTextInfoTooltip("Что-то пошло не так. Попробуйте еще раз.");
         setIsOpen(true);
       });
   };
@@ -80,18 +84,12 @@ const Login = ({ onLogin, ...props }) => {
           </button>
         </form>
       </div>
-      <InfoTooltip onClose={onPopupClosed} isOpen={isOpen}>
-        <div className="popup__note-container">
-          <img
-            className="popup__forbidden-symbol"
-            src={forbidden}
-            alt="forbidden"
-          />
-          <h2 className="popup__title popup__title_note">
-            Что-то пошло не так. Попробуйте еще раз.
-          </h2>
-        </div>
-      </InfoTooltip>
+      <InfoTooltip
+        onClose={onPopupClosed}
+        isOpen={isOpen}
+        image={imageInfoTooltip}
+        text={textInfoTooltip}
+      />
     </>
   );
 };

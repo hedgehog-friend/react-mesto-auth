@@ -14,7 +14,14 @@ function InfoTooltip(props) {
           className="popup__exit"
           onClick={props.onClose}
         ></button>
-        {props.children}
+        <div className="popup__note-container">
+          <img
+            className="popup__forbidden-symbol"
+            src={props.image}
+            alt="символ"
+          />
+          <h2 className="popup__title popup__title_note">{props.text}</h2>
+        </div>
       </div>
     </div>
   );
